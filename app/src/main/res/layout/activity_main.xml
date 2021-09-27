@@ -58,7 +58,7 @@
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="10"
-        android:text="Localy"
+        android:text="Foody Krave"
         android:textColor="#FFFFFF"
         android:textSize="70sp"
         app:layout_constraintBottom_toBottomOf="parent"
