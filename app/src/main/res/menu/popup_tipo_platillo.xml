@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/desayuno"
+        android:title="Desayuno" />
+
+    <item
+        android:id="@+id/comida"
+        android:title="Comida" />
+
+    <item
+        android:id="@+id/cena"
+        android:title="Cena" />
+
+    <item
+        android:id="@+id/postre"
+        android:title="Postre" />
+
+    <item
+        android:id="@+id/entrecomida"
+        android:title="Entre comida" />
+</menu>

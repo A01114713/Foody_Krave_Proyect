@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="40dp"
+        tools:context=".AgregarPlatilloActivity">
+
+        <Button
+            android:id="@+id/ingrediente_secundario_button"
+            android:layout_width="205dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="left|center_vertical"
+            android:onClick="buscarIngredienteSecundario"
+            android:text="Ingrediente Secundario"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.199"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingrediente_principal_button"
+            app:strokeColor="#000000"
+            app:strokeWidth="3sp" />
+
+        <ImageView
+            android:id="@+id/rectangle_nombre_image"
+            android:layout_width="285dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/retangle" />
+
+        <Button
+            android:id="@+id/platillo_tiempo_button"
+            android:layout_width="285dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="left|center_vertical"
+            android:onClick="popupTiempoMostrar"
+            android:text="Tiempo"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/platillo_tipo_button"
+            app:strokeColor="#000000"
+            app:strokeWidth="3sp" />
+
+        <Button
+            android:id="@+id/platillo_tipo_button"
+            android:layout_width="285dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="left|center_vertical"
+            android:onClick="popupTipoMostrar"
+            android:text="Tipo"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingrediente_secundario_button"
+            app:strokeColor="#000000"
+            app:strokeWidth="3sp" />
+
+        <Button
+            android:id="@+id/ingrediente_principal_button"
+            android:layout_width="205dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="left|center_vertical"
+            android:onClick="buscarIngredientePrincipal"
+            android:text="Ingrediente Principal"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.189"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/receta_platillo_text"
+            app:strokeColor="#000000"
+            app:strokeWidth="3sp" />
+
+        <Button
+            android:id="@+id/imagen_platillo_button"
+            android:layout_width="205dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="left|center_vertical"
+            android:onClick="seleccionarImagen"
+            android:text="IMAGEN"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.184"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombre_platillo_text"
+            app:strokeColor="#000000"
+            app:strokeWidth="3sp" />
+
+        <EditText
+            android:id="@+id/nombre_platillo_text"
+            android:layout_width="285dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:hint="NOMBRE PLATILLO"
+            android:inputType="textPersonName"
+            android:maxLength="28"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/platillo_agregar_image"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintStart_toEndOf="@+id/imagen_platillo_button"
+            app:layout_constraintTop_toBottomOf="@+id/nombre_platillo_text" />
+
+        <Button
+            android:id="@+id/buscar_platillo_button"
+            android:layout_width="165dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="#000000"
+            android:gravity="left|center_vertical"
+            android:onClick="checkPlatillo"
+            android:text="GUARDAR"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/platillo_tiempo_button" />
+
+        <ImageView
+            android:id="@+id/rectangle_ingredientes_image"
+            android:layout_width="285dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imagen_platillo_button"
+            app:srcCompat="@drawable/retangle" />
+
+        <EditText
+            android:id="@+id/ingredientes_platillo_text"
+            android:layout_width="285dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:freezesText="false"
+            android:gravity="start|top"
+            android:hint="INGREDIENTES"
+            android:inputType="textMultiLine"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imagen_platillo_button" />
+
+        <ImageView
+            android:id="@+id/rectangle_receta_image"
+            android:layout_width="285dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingredientes_platillo_text"
+            app:srcCompat="@drawable/retangle" />
+
+        <EditText
+            android:id="@+id/receta_platillo_text"
+            android:layout_width="285dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="RECETA"
+            android:inputType="textMultiLine"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rectangle_ingredientes_image" />
+
+        <ImageView
+            android:id="@+id/ingrediente_principal_imagen"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintStart_toEndOf="@+id/ingrediente_principal_button"
+            app:layout_constraintTop_toBottomOf="@+id/receta_platillo_text" />
+
+        <ImageView
+            android:id="@+id/ingrediente_secundario_imagen"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintStart_toEndOf="@+id/ingrediente_secundario_button"
+            app:layout_constraintTop_toBottomOf="@+id/ingrediente_principal_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

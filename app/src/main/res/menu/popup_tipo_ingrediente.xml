@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fruta"
+        android:title="Fruta" />
+
+    <item
+        android:id="@+id/verdura"
+        android:title="Verdura" />
+
+    <item
+        android:id="@+id/carne"
+        android:title="Carne" />
+
+    <item
+        android:id="@+id/lacteo"
+        android:title="Lacteo" />
+
+    <item
+        android:id="@+id/cereal"
+        android:title="Cereal" />
+
+    <item
+        android:id="@+id/grasa"
+        android:title="Grasa" />
+
+    <item
+        android:id="@+id/azucar"
+        android:title="Azucar" />
+
+</menu>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity">
+
+    <Button
+        android:id="@+id/guardados_button"
+        android:layout_width="286dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#FFFFFF"
+        android:onClick="platillosGuardados"
+        android:text="PLATILLOS GUARDADOS"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buscar_button"
+        app:strokeColor="#000000"
+        app:strokeWidth="6sp" />
+
+    <Button
+        android:id="@+id/cuenta_button"
+        android:layout_width="286dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#FFFFFF"
+        android:onClick="cuenta"
+        android:text="CUENTA"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/agregar_button"
+        app:strokeColor="#000000"
+        app:strokeWidth="6sp" />
+
+    <Button
+        android:id="@+id/agregar_button"
+        android:layout_width="286dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#FFFFFF"
+        android:onClick="agregarPlatillo"
+        android:text="AGREGAR PLATILLO"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guardados_button"
+        app:strokeColor="#000000"
+        app:strokeWidth="6sp" />
+
+    <Button
+        android:id="@+id/buscar_button"
+        android:layout_width="286dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#FFFFFF"
+        android:onClick="buscarPlatillo"
+        android:text="Buscar platillo"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#000000"
+        app:strokeWidth="6sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

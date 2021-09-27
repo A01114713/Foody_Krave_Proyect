@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/acido"
+        android:title="Acido" />
+
+    <item
+        android:id="@+id/dulce"
+        android:title="Dulce" />
+
+    <item
+        android:id="@+id/salado"
+        android:title="Salado" />
+
+    <item
+        android:id="@+id/amargo"
+        android:title="Amargo" />
+
+    <item
+        android:id="@+id/picante"
+        android:title="Picante" />
+
+</menu>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "348126279435",
+    "project_id": "foody-krave",
+    "storage_bucket": "foody-krave.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348126279435:android:535c54869db6e83437140e",
+        "android_client_info": {
+          "package_name": "com.itesm.foodykraveproyect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348126279435-2dmuo2ap6h0j7c1jjb32hebk3hvpq9dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI5J0L5TnILA-Vf6n9FEpvCzAv0bKaUa8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348126279435-2dmuo2ap6h0j7c1jjb32hebk3hvpq9dk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
