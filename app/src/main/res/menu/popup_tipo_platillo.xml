@@ -18,6 +18,10 @@
         android:title="Postre" />
 
     <item
+        android:id="@+id/bebida"
+        android:title="Bebida" />
+
+    <item
         android:id="@+id/entrecomida"
         android:title="Entre comida" />
 </menu>

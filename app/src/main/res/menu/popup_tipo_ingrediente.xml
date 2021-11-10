@@ -14,6 +14,10 @@
         android:title="Carne" />
 
     <item
+        android:id="@+id/marisco"
+        android:title="Marisco" />
+
+    <item
         android:id="@+id/lacteo"
         android:title="Lacteo" />
 

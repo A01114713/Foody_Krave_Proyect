@@ -36,9 +36,11 @@ class AgregarIngredienteActivity : AppCompatActivity() {
         imagen = findViewById(R.id.ingrediente_image)
 
         buscarImagen = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            imagenUri = it
-            imagen.setImageURI(imagenUri)
-            imagenEmpty = false
+            if(it != null) {
+                imagenUri = it
+                imagen.setImageURI(imagenUri)
+                imagenEmpty = false
+            }
         }
     }
 
@@ -110,6 +112,8 @@ class AgregarIngredienteActivity : AppCompatActivity() {
     }
 
     fun seleccionarImagen(view : View){
+
+
         buscarImagen.launch("image/*")
     }
 

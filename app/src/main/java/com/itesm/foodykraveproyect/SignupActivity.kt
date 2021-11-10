@@ -19,7 +19,7 @@ class SignupActivity : AppCompatActivity() {
     lateinit var email : EditText
     lateinit var password : EditText
     lateinit var username : EditText
-    var arrayVacio: ArrayList<String> = arrayListOf()
+    //var arrayVacio: ArrayList<String> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,23 @@ class SignupActivity : AppCompatActivity() {
         username = findViewById(R.id.username_edit_text_signup)
     }
 
-    fun registro(view : View?){
+    fun revisarCampos(view : View) {
+        if(email.text.toString().isEmpty()){
+            Toast.makeText(this, "Falta agregar el correo electronico", Toast.LENGTH_SHORT).show();
+            return
+        }
+        if(password.text.toString().isEmpty()){
+            Toast.makeText(this, "Falta agregar la contraseña", Toast.LENGTH_SHORT).show();
+            return
+        }
+        if(username.text.toString().isEmpty()){
+            Toast.makeText(this, "Falta agregar el nombre de usuario", Toast.LENGTH_SHORT).show();
+            return
+        }
+        registrarCuenta()
+    }
+
+    fun registrarCuenta(){
         Firebase.auth.createUserWithEmailAndPassword(
             email.text.toString(),
             password.text.toString()).addOnCompleteListener(this){
@@ -48,8 +64,8 @@ class SignupActivity : AppCompatActivity() {
     fun registrarUsername() {
         val usuario = hashMapOf(
             "user id" to FirebaseAuth.getInstance().currentUser?.uid.toString(),
-            "username" to username.text.toString(),
-            "platillos" to arrayVacio
+            "username" to username.text.toString()
+            //"platillos" to arrayVacio
         )
 
         Firebase.firestore.collection("usuarios")
@@ -63,7 +79,6 @@ class SignupActivity : AppCompatActivity() {
             .addOnFailureListener {
 
                 Log.e("FIREBASE", "exception: ${it.message}")
-                Toast.makeText(this, "Nombre no se pudo guardar", Toast.LENGTH_SHORT).show();
             }
     }
 }

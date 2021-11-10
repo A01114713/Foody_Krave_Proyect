@@ -23,7 +23,19 @@ class LoginActivity : AppCompatActivity() {
         password = findViewById(R.id.password_text_edit)
     }
 
-    fun login(view : View){
+    fun revisarCampos(view : View) {
+        if(email.text.toString().isEmpty()){
+            Toast.makeText(this, "Falta agregar el correo electronico", Toast.LENGTH_SHORT).show();
+            return
+        }
+        if(password.text.toString().isEmpty()){
+            Toast.makeText(this, "Falta agregar la contraseña", Toast.LENGTH_SHORT).show();
+            return
+        }
+        login()
+    }
+
+    fun login(){
         Firebase.auth.signInWithEmailAndPassword(
             email.text.toString(),
             password.text.toString()

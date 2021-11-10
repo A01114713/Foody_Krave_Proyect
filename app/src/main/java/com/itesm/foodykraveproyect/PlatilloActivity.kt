@@ -47,7 +47,7 @@ class PlatilloActivity : AppCompatActivity() {
                         nombre.text = documento.data["nombre"].toString()
                         ingredientes.text = "Ingredientes: \n" + documento.data["ingredientes texto"].toString()
                         receta.text = "Receta: \n" + documento.data["receta"].toString()
-                        leerAutor(documento.data["autor"].toString())
+                        leerAutor(documento.data["user id"].toString())
                         leerImagen(platilloID)
                     }
                 }
@@ -63,7 +63,7 @@ class PlatilloActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener {
                 for (documento in it) {
-                    if(documento.data["user id"] == autorid){
+                    if(documento.data["user id"] == autorid) {
                         autor.text = documento.data["username"].toString()
                     }
                 }

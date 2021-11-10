@@ -54,7 +54,7 @@
         android:layout_width="254dp"
         android:layout_height="41dp"
         android:backgroundTint="#000000"
-        android:onClick="login"
+        android:onClick="revisarCampos"
         android:text="LOGIN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

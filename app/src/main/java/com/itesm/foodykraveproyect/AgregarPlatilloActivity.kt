@@ -67,9 +67,11 @@ class AgregarPlatilloActivity : AppCompatActivity() {
         ingredienteSecundarioImagen = findViewById(R.id.ingrediente_secundario_imagen)
 
         buscarImagen = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            imagenUri = it
-            imagen.setImageURI(imagenUri)
-            imagenEmpty = false
+            if(it != null) {
+                imagenUri = it
+                imagen.setImageURI(imagenUri)
+                imagenEmpty = false
+            }
         }
     }
 
