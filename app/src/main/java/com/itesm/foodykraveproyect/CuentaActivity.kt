@@ -11,6 +11,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseUser
+
+
+
 
 class CuentaActivity : AppCompatActivity() {
     lateinit var nombre : Button
@@ -30,7 +34,10 @@ class CuentaActivity : AppCompatActivity() {
 
                 for (documento in it) {
                     if(documento.data["user id"] == FirebaseAuth.getInstance().currentUser?.uid.toString()){
-                        nombre.text = documento.data["username"].toString()
+                        val username = documento.data["username"].toString();
+                        val user = FirebaseAuth.getInstance().getCurrentUser()
+                        val correo = user?.email
+                        nombre.text = "Username: $username \n" + "Correo: $correo"
                         break
                     }
                 }

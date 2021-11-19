@@ -44,7 +44,7 @@ class BuscarIngredienteActivity : AppCompatActivity() {
                 for (documento in it) {
                     leerImagen(documento.id, documento.data["nombre"].toString())
                 }
-                iniciarRecycler()
+
             }
             .addOnFailureListener() {
 
@@ -59,11 +59,10 @@ class BuscarIngredienteActivity : AppCompatActivity() {
             .addOnSuccessListener {
 
                 for (documento in it) {
-                    if(documento.data["nombre"] == busqueda.text.toString()){
+                    if (documento.data["nombre"] == busqueda.text.toString()) {
                         leerImagen(documento.id, documento.data["nombre"].toString())
                     }
                 }
-                iniciarRecycler()
             }
             .addOnFailureListener() {
 
@@ -86,6 +85,7 @@ class BuscarIngredienteActivity : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
                 ingredientes.add(Ingrediente(nombreVar, bitmap, nombreImagen))
                 Log.d("FIREBASE", "Correctamente cargado")
+                iniciarRecycler()
             }
             .addOnFailureListener {
 

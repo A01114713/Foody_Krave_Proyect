@@ -44,7 +44,6 @@ class BuscarPlatilloActivity : AppCompatActivity() {
                         }
                     }
                 }
-                iniciarRecycler()
             }
             .addOnFailureListener() {
 
@@ -62,7 +61,7 @@ class BuscarPlatilloActivity : AppCompatActivity() {
 
                 val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
                 platillos.add(Platillo(nombreVar, bitmap, nombreImagen))
-
+                iniciarRecycler()
             }
             .addOnFailureListener {
 

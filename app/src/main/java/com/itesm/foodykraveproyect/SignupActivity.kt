@@ -19,7 +19,7 @@ class SignupActivity : AppCompatActivity() {
     lateinit var email : EditText
     lateinit var password : EditText
     lateinit var username : EditText
-    //var arrayVacio: ArrayList<String> = arrayListOf()
+    var arrayVacio: ArrayList<String> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +64,8 @@ class SignupActivity : AppCompatActivity() {
     fun registrarUsername() {
         val usuario = hashMapOf(
             "user id" to FirebaseAuth.getInstance().currentUser?.uid.toString(),
-            "username" to username.text.toString()
-            //"platillos" to arrayVacio
+            "username" to username.text.toString(),
+            "platillos" to arrayVacio
         )
 
         Firebase.firestore.collection("usuarios")
