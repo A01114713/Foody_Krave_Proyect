@@ -5,52 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
+    app:cardBackgroundColor="?attr/colorOnPrimary"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:clickable="false"
-        android:orientation="vertical">
+        android:layout_gravity="start|center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="2dp">
 
-        <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:clickable="false"
-            android:foreground="@drawable/smaller_rectangle"
-            android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/ingrediente_item_img"
+            android:layout_width="64dp"
+            android:layout_height="64dp" />
 
-            <ImageView
-                android:id="@+id/ingrediente_image_item"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:clickable="false" />
+        <TextView
+            android:id="@+id/ingrediente_item_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="nombre"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="26sp" />
 
-            <TextView
-                android:id="@+id/ingrediente_texto_item"
-                android:layout_width="wrap_content"
-                android:layout_height="65dp"
-                android:gravity="center_vertical"
-                android:textColor="@color/black"
-                android:textSize="26dp" />
-
-            <TextView
-                android:id="@+id/ingrediente_id_item"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="0"
-                android:visibility="visible"
-                tools:visibility="visible" />
-
-        </LinearLayout>
-        >
+        <TextView
+            android:id="@+id/ingrediente_item_id"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:text="id"
+            android:visibility="invisible" />
 
     </LinearLayout>
-    <![CDATA[
-
-    >
-]]>
 </androidx.cardview.widget.CardView>

@@ -6,57 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".BuscarIngredienteActivity">
 
-    <EditText
-        android:id="@+id/buscar_ingrediente_text"
-        android:layout_width="297dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:hint="Nombre Iingrediente"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.728"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/button"
-        android:layout_width="63dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="12dp"
-        android:backgroundTint="#000000"
+        android:id="@+id/buscar_ingrediente_btn"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="?attr/colorOnSecondary"
         android:onClick="buscarIngrediente"
         app:icon="@android:drawable/ic_menu_search"
         app:iconGravity="start"
-        app:layout_constraintEnd_toStartOf="@+id/buscar_ingrediente_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/buscar_ingrediente_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Nombre Ingrediente"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buscar_ingrediente_btn"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="141dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#000000"
-        android:onClick="agregarIngrediente"
-        android:text="Agregar Ingrediente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="96dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buscar_ingrediente_text">
+        app:layout_constraintTop_toBottomOf="@+id/buscar_ingrediente_input">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvingredientes_list"
+            android:id="@+id/rv_ingredientes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/ingrediente_item" />
     </ScrollView>
+
+    <Button
+        android:id="@+id/agregar_ingrediente_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="?attr/colorOnSecondary"
+        android:onClick="agregarIngrediente"
+        android:text="Agregar Ingrediente"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

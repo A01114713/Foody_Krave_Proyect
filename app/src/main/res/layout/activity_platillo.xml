@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -17,85 +18,105 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/agregar_eliminar_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#000000"
-                android:onClick="agregarEliminar"
-                android:text="Agregar"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receta_text" />
-
             <TextView
-                android:id="@+id/platillo_nombre_text"
-                android:layout_width="350dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="15dp"
+                android:id="@+id/platillo_nombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="?attr/colorOnPrimary"
                 android:foreground="@drawable/retangle"
                 android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="34sp"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_max="140dp"
+                app:layout_constraintHeight_min="80dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/platillo_image"
-                android:layout_width="350dp"
-                android:layout_height="202dp"
-                android:layout_marginTop="5dp"
+                android:id="@+id/platillo_imagen"
+                android:layout_width="0dp"
+                android:layout_height="204dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:background="?attr/colorOnPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/platillo_nombre_text" />
-
-            <EditText
-                android:id="@+id/ingredientes_text"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@null"
-                android:ems="10"
-                android:focusable="false"
-                android:foreground="@drawable/smaller_rectangle"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:text="Ingredientes:"
-                android:textColor="#000000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/autor_text" />
-
-            <EditText
-                android:id="@+id/receta_text"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="21dp"
-                android:background="@null"
-                android:ems="10"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:foreground="@drawable/smaller_rectangle"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:text="Receta:"
-                android:textColor="#000000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredientes_text" />
+                app:layout_constraintTop_toBottomOf="@+id/platillo_nombre" />
 
             <TextView
-                android:id="@+id/autor_text"
-                android:layout_width="181dp"
-                android:layout_height="29dp"
-                android:layout_marginTop="20dp"
+                android:id="@+id/platillo_autor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="192dp"
+                android:background="?attr/colorOnPrimary"
+                android:text="autor"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="16sp"
+                android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.134"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/platillo_image" />
+                app:layout_constraintTop_toBottomOf="@+id/platillo_imagen" />
+
+            <TextView
+                android:id="@+id/platillo_ingredientes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="?attr/colorOnPrimary"
+                android:ems="10"
+                android:foreground="@drawable/smaller_rectangle"
+                android:gravity="start|top"
+                android:minLines="2"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="2dp"
+                android:text="Ingredientes:"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/platillo_autor" />
+
+            <TextView
+                android:id="@+id/platillo_receta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="?attr/colorOnPrimary"
+                android:ems="10"
+                android:foreground="@drawable/smaller_rectangle"
+                android:gravity="start|top"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="2dp"
+                android:text="Receta:"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/platillo_ingredientes" />
+
+            <Button
+                android:id="@+id/agregar_eliminar_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="?attr/colorOnSecondary"
+                android:onClick="agregarEliminar"
+                android:text="Agregar"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/platillo_receta" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

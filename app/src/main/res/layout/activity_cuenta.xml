@@ -7,51 +7,59 @@
     tools:context=".CuentaActivity">
 
     <Button
-        android:id="@+id/cerrar_sesion_button"
-        android:layout_width="286dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="88dp"
-        android:backgroundTint="#000000"
-        android:onClick="logout"
-        android:text="CERRAR SESIÓN"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mis_platillos_button" />
-
-    <Button
-        android:id="@+id/mis_platillos_button"
-        android:layout_width="286dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="88dp"
-        android:backgroundTint="#FFFFFF"
-        android:onClick="misPlatillos"
-        android:text="MIS PLATILLOS"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mi_informacion_button"
-        app:strokeColor="#000000"
-        app:strokeWidth="6sp" />
-
-    <Button
-        android:id="@+id/mi_informacion_button"
-        android:layout_width="286dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="88dp"
-        android:backgroundTint="#FFFFFF"
+        android:id="@+id/cuenta_mi_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="?attr/colorOnPrimary"
         android:clickable="false"
         android:focusable="false"
-        android:textColor="#000000"
-        android:textSize="14sp"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHeight_max="144dp"
+        app:layout_constraintHeight_min="88dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#000000"
-        app:strokeWidth="6sp" />
+        app:strokeColor="?attr/colorOnSecondary"
+        app:strokeWidth="3sp" />
+
+    <Button
+        android:id="@+id/cuenta_mis_platillos_btn"
+        android:layout_width="0dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="?attr/colorOnPrimary"
+        android:onClick="misPlatillos"
+        android:text="Mis platillos"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cuenta_mi_info"
+        app:strokeColor="?attr/colorOnSecondary"
+        app:strokeWidth="5sp" />
+
+    <Button
+        android:id="@+id/cerrar_sesion_btn"
+        android:layout_width="0dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="?attr/colorOnSecondary"
+        android:onClick="logout"
+        android:text="Cerrar Sesión"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cuenta_mis_platillos_btn"
+        app:strokeColor="?attr/colorOnSecondary"
+        app:strokeWidth="5sp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

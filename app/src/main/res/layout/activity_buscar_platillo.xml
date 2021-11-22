@@ -6,17 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".BuscarPlatilloActivity">
 
+    <EditText
+        android:id="@+id/buscar_platillos_encontrados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="platillos encontrados: "
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
-        android:id="@+id/scrollView4"
-        android:layout_width="405dp"
-        android:layout_height="653dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/buscar_platillos_encontrados">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvplatillos_list"
+            android:id="@+id/rv_platillos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/plantillo_item" />
