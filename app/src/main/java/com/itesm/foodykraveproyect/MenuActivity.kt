@@ -11,14 +11,15 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class MenuActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
     }
 
-    fun platillosGuardados (view : View){
-        var platillosGuardados : ArrayList<String> = arrayListOf()
-        var usuario = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    fun platillosGuardados (v : View){
+        var platillosGuardados: ArrayList<String>
+        val usuario = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
         Firebase.firestore.collection("usuarios")
             .get()
@@ -26,9 +27,13 @@ class MenuActivity : AppCompatActivity() {
                 for (documento in it) {
                     if(documento.data["user id"] == usuario){
                         platillosGuardados = documento.data["platillos"] as ArrayList<String>
-                        if(platillosGuardados.size == 0){
-                            Toast.makeText(this, "No hay platillos guardados", Toast.LENGTH_SHORT).show();
-                        } else if(platillosGuardados.size > 0){
+                        if (platillosGuardados.isEmpty()) {
+                            Toast.makeText(
+                                this,
+                                "No hay platillos guardados",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
                             val intent = Intent(this, BuscarPlatilloActivity::class.java)
                             intent.putExtra("Platillos", platillosGuardados)
                             startActivity(intent)
@@ -36,24 +41,27 @@ class MenuActivity : AppCompatActivity() {
                     }
                 }
             }
-            .addOnFailureListener() {
-
-                Log.e("FIRESTORE", "error al leer servicios: ${it.message}")
+            .addOnFailureListener {
+                Log.e("FIRESTORE Menu", "Error al leer servicios: ${it.message}")
             }
     }
 
-    fun buscarPlatillo (view : View){
+    fun buscarPlatillo (v : View){
         val intent = Intent(this, MenuBuscarPlatilloActivity::class.java)
         startActivity(intent)
     }
 
-    fun agregarPlatillo (view : View){
+    fun agregarPlatillo (v : View){
         val intent = Intent(this, AgregarPlatilloActivity::class.java)
         startActivity(intent)
     }
 
-    fun cuenta (view : View){
+    fun cuenta (v : View){
         val intent = Intent(this, CuentaActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        return
     }
 }

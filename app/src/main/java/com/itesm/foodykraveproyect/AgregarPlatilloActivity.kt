@@ -1,17 +1,15 @@
 package com.itesm.foodykraveproyect
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.media.Image
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -25,9 +23,7 @@ class AgregarPlatilloActivity : AppCompatActivity() {
     lateinit var ingredientesTexto: EditText
     lateinit var receta: EditText
     lateinit var tipo: Button
-    lateinit var tipoVar: String
     lateinit var tiempo: Button
-    lateinit var tiempoVar: String
     lateinit var imagenUri: Uri
     lateinit var buscarImagen: ActivityResultLauncher<String>
 
@@ -35,18 +31,17 @@ class AgregarPlatilloActivity : AppCompatActivity() {
     lateinit var ingredientePrincipalImagen : ImageView
     lateinit var ingredienteSecundarioID : String
     lateinit var ingredienteSecundarioImagen : ImageView
+    var tipoVar: String = ""
+    var tiempoVar: String = ""
     var imagenEmpty : Boolean = true
 
     val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result ->
-
         if(result.resultCode == 1){
             val data:Intent? = result.data
             ingredientePrincipalID = data?.getStringExtra("result").toString()
             leerImagen(ingredientePrincipalID, 1)
-        }
-
-        if(result.resultCode == 2){
+        } else if(result.resultCode == 2){
             val data:Intent? = result.data
             ingredienteSecundarioID = data?.getStringExtra("result").toString()
             leerImagen(ingredienteSecundarioID, 2)
@@ -57,14 +52,14 @@ class AgregarPlatilloActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_platillo)
 
-        nombre = findViewById(R.id.nombre_platillo_text)
-        imagen = findViewById(R.id.platillo_agregar_image)
-        ingredientesTexto = findViewById(R.id.ingredientes_platillo_text)
-        receta = findViewById(R.id.receta_platillo_text)
-        tipo = findViewById(R.id.platillo_tipo_button)
-        tiempo = findViewById(R.id.platillo_tiempo_button)
-        ingredientePrincipalImagen = findViewById(R.id.ingrediente_principal_imagen)
-        ingredienteSecundarioImagen = findViewById(R.id.ingrediente_secundario_imagen)
+        nombre = findViewById(R.id.agregar_platillo_nombre)
+        imagen = findViewById(R.id.agregar_platillo_img)
+        ingredientesTexto = findViewById(R.id.agregar_platillo_ingredientes_input)
+        receta = findViewById(R.id.agregar_platillo_receta_input)
+        tipo = findViewById(R.id.agregar_platillo_tipo_btn)
+        tiempo = findViewById(R.id.agregar_platillo_tiempo_btn)
+        ingredientePrincipalImagen = findViewById(R.id.agregar_platillo_ingrediente_principal_img)
+        ingredienteSecundarioImagen = findViewById(R.id.agregar_platillo_ingrediente_secundario_img)
 
         buscarImagen = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if(it != null) {
@@ -81,25 +76,25 @@ class AgregarPlatilloActivity : AppCompatActivity() {
 
         storageReference.getFile(localfile)
             .addOnSuccessListener {
-
                 val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
                 if(type == 1){
                     ingredientePrincipalImagen.setImageBitmap(bitmap)
                 } else if (type == 2){
                     ingredienteSecundarioImagen.setImageBitmap(bitmap)
                 }
-
-                Log.d("FIREBASE", "Correctamente cargado")
+                Log.d("FIREBASE Agregar Platillo", "Correctamente cargado")
             }
             .addOnFailureListener {
-
-                Log.e("FIREBASE", "exception: ${it.message}")
+                Log.e("FIREBASE Agregar Platillo", "exception: ${it.message}")
             }
     }
 
     fun registrarDatos() {
+        val str = nombre.text.toString()
+        val sub = str.subSequence(1, str.length).toString()
+        val name = str[0].uppercase() + sub.lowercase()
         val platillo = hashMapOf(
-            "nombre" to nombre.text.toString(),
+            "nombre" to name,
             "ingredientes texto" to ingredientesTexto.text.toString(),
             "receta" to receta.text.toString(),
             "tipo" to tipoVar,
@@ -112,77 +107,71 @@ class AgregarPlatilloActivity : AppCompatActivity() {
         Firebase.firestore.collection("platillos")
             .add(platillo)
             .addOnSuccessListener {
-
-                Toast.makeText(this, "Platillo agregado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Platillo agregado", Toast.LENGTH_SHORT).show()
                 registrarImagen(it.id)
-                Log.d("FIREBASE", "id: ${it.id}")
+                Log.d("FIREBASE Agregar Platillo", "id: ${it.id}")
                 finish()
             }
             .addOnFailureListener {
-
-                Toast.makeText(this, "Error al agregar el platillo", Toast.LENGTH_SHORT).show();
-                Log.e("FIREBASE", "exception: ${it.message}")
+                Toast.makeText(this, "Error al agregar el platillo", Toast.LENGTH_SHORT).show()
+                Log.e("FIREBASE Agregar Platillo", "exception: ${it.message}")
             }
     }
 
-    fun checkPlatillo(view : View) {
+    fun checkPlatillo(v : View) {
         if(nombre.text.toString().isEmpty() || tipoVar.isEmpty() || tiempoVar.isEmpty()
             || ingredientesTexto.text.toString().isEmpty() || receta.text.toString().isEmpty()
             || ingredientePrincipalID.isEmpty() || ingredienteSecundarioID.isEmpty() || imagenEmpty){
-            Toast.makeText(this, "Falta agregar uno o mas campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Falta agregar uno o mas campos", Toast.LENGTH_SHORT).show()
             return
         }
         registrarDatos()
     }
 
-    fun seleccionarImagen(view: View) {
+    fun seleccionarImagen(v: View) {
         buscarImagen.launch("image/*")
     }
 
     fun registrarImagen(referenciaDocumento: String) {
-
         val storageReference = FirebaseStorage.getInstance().getReference("imagenesPlatillos/$referenciaDocumento")
         storageReference.putFile(imagenUri)
             .addOnSuccessListener {
-
-                Log.d("FIREBASE", "Correctamente cargado")
+                Log.d("FIREBASE Agregar Platillo", "Correctamente cargado")
             }
             .addOnFailureListener {
-
-                Log.e("FIREBASE", "exception: ${it.message}")
+                Log.e("FIREBASE Agregar Platillo", "exception: ${it.message}")
             }
     }
 
-    fun popupTipoMostrar(view: View) {
-        val popupTipo: PopupMenu = PopupMenu(this, tipo)
+    fun popupTipoMostrar(v: View) {
+        val popupTipo = PopupMenu(this, tipo)
         popupTipo.menuInflater.inflate(R.menu.popup_tipo_platillo, popupTipo.menu)
-        popupTipo.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+        popupTipo.setOnMenuItemClickListener { item ->
             tipoVar = item.title.toString()
-            tipo.text = "Tipo  " + tipoVar
+            tipo.text = "Tipo  $tipoVar"
             true
-        })
+        }
         popupTipo.show()
     }
 
-    fun popupTiempoMostrar(view: View) {
-        val popupTiempo: PopupMenu = PopupMenu(this, tiempo)
+    fun popupTiempoMostrar(v: View) {
+        val popupTiempo = PopupMenu(this, tiempo)
         popupTiempo.menuInflater.inflate(R.menu.popup_tiempo_platillo, popupTiempo.menu)
-        popupTiempo.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+        popupTiempo.setOnMenuItemClickListener { item ->
             tiempoVar = item.title.toString()
-            tiempo.text = "Tiempo  " + tiempoVar
+            tiempo.text = "Tiempo  $tiempoVar"
             true
-        })
+        }
         popupTiempo.show()
     }
 
-    fun buscarIngredientePrincipal(view : View){
+    fun buscarIngredientePrincipal(v : View){
         val intent = Intent(this, BuscarIngredienteActivity::class.java)
         intent.putExtra("type", "1")
         activityResultLauncher.launch(intent)
-        //startActivity(intent)
     }
 
-    fun buscarIngredienteSecundario(view : View){
+    fun buscarIngredienteSecundario(v : View){
         val intent = Intent(this, BuscarIngredienteActivity::class.java)
         intent.putExtra("type", "2")
         activityResultLauncher.launch(intent)

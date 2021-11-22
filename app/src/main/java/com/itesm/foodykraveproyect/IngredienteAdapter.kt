@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class IngredienteAdapter(val ingredientes : List<Ingrediente>) : RecyclerView.Adapter<IngredienteAdapter.IngredienteHolder>(){
@@ -34,9 +33,10 @@ class IngredienteAdapter(val ingredientes : List<Ingrediente>) : RecyclerView.Ad
     }
 
     class IngredienteHolder(val view : View, listener: onItemClickListener) : RecyclerView.ViewHolder(view){
-        val ingredienteTexto = view.findViewById<TextView>(R.id.ingrediente_texto_item)
-        val ingredienteImagen = view.findViewById<ImageView>(R.id.ingrediente_image_item)
-        val ingredienteID = view.findViewById<TextView>(R.id.ingrediente_id_item)
+
+        val ingredienteImagen = view.findViewById<ImageView>(R.id.ingrediente_item_img)
+        val ingredienteTexto = view.findViewById<TextView>(R.id.ingrediente_item_txt)
+        val ingredienteID = view.findViewById<TextView>(R.id.ingrediente_item_id)
 
         init {
             itemView.setOnClickListener {
@@ -45,9 +45,8 @@ class IngredienteAdapter(val ingredientes : List<Ingrediente>) : RecyclerView.Ad
         }
 
         fun render(ingredientes : Ingrediente){
-
-            ingredienteTexto.text = ingredientes.nombreIngrediente
             ingredienteImagen.setImageBitmap(ingredientes.imagenBitmap)
+            ingredienteTexto.text = ingredientes.nombreIngrediente
             ingredienteID.text = ingredientes.idIngrediente
         }
     }

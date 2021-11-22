@@ -1,15 +1,12 @@
 package com.itesm.foodykraveproyect
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
@@ -30,47 +27,47 @@ class BuscarIngredienteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_buscar_ingrediente)
 
         type = intent.getStringExtra("type").toString()
-        ingredientesIniciales()
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        rvIngredientes = findViewById(R.id.rvingredientes_list)
-        busqueda = findViewById(R.id.buscar_ingrediente_text)
+        busqueda = findViewById(R.id.buscar_ingrediente_input)
+        rvIngredientes = findViewById(R.id.rv_ingredientes)
+
+        rvIngredientes.layoutManager = LinearLayoutManager(this)
     }
 
-    fun ingredientesIniciales(){
+    override fun onStart() {
+        super.onStart()
         Firebase.firestore.collection("ingredientes")
             .get()
             .addOnSuccessListener {
-
                 for (documento in it) {
                     leerImagen(documento.id, documento.data["nombre"].toString())
                 }
-
+                iniciarRecycler()
             }
-            .addOnFailureListener() {
-
-                Log.e("FIRESTORE", "error al leer servicios: ${it.message}")
+            .addOnFailureListener {
+                Log.e("FIRESTORE Buscar Ingrediente", "Error al leer servicios: ${it.message}")
             }
     }
 
-    fun buscarIngrediente(view : View){
+    fun buscarIngrediente(v : View){
         ingredientes.clear()
         Firebase.firestore.collection("ingredientes")
             .get()
             .addOnSuccessListener {
-
                 for (documento in it) {
-                    if (documento.data["nombre"] == busqueda.text.toString()) {
+                    if (busqueda.text.isBlank()){
+                        leerImagen(documento.id, documento.data["nombre"].toString())
+                    } else if(documento.data["nombre"].toString().lowercase().contains(busqueda.text.toString().lowercase())){
                         leerImagen(documento.id, documento.data["nombre"].toString())
                     }
                 }
+                iniciarRecycler()
             }
-            .addOnFailureListener() {
-
-                Log.e("FIRESTORE", "error al leer servicios: ${it.message}")
+            .addOnFailureListener {
+                Log.e("FIRESTORE Buscar Ingrediente", "error al leer servicios: ${it.message}")
             }
     }
 
-    fun agregarIngrediente(view: View){
+    fun agregarIngrediente(v: View){
         val intent = Intent(this, AgregarIngredienteActivity::class.java)
         startActivity(intent)
     }
@@ -81,20 +78,16 @@ class BuscarIngredienteActivity : AppCompatActivity() {
 
         storageReference.getFile(localfile)
             .addOnSuccessListener {
-
                 val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
                 ingredientes.add(Ingrediente(nombreVar, bitmap, nombreImagen))
-                Log.d("FIREBASE", "Correctamente cargado")
-                iniciarRecycler()
+                Log.d("FIREBASE Buscar Ingrediente", "Correctamente cargado")
             }
             .addOnFailureListener {
-
-                Log.e("FIREBASE", "exception: ${it.message}")
+                Log.e("FIREBASE Buscar Ingrediente", "exception: ${it.message}")
             }
     }
 
     fun iniciarRecycler(){
-        rvIngredientes.layoutManager = LinearLayoutManager(this)
         val adapter = IngredienteAdapter(ingredientes)
         rvIngredientes.adapter = adapter
         adapter.setOnItemClickListener(object : IngredienteAdapter.onItemClickListener{

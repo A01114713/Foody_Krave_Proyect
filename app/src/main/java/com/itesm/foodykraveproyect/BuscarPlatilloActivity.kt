@@ -2,12 +2,9 @@ package com.itesm.foodykraveproyect
 
 import android.content.Intent
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
@@ -19,36 +16,36 @@ class BuscarPlatilloActivity : AppCompatActivity() {
 
     lateinit var rvPlatillos : RecyclerView
 
-    var busquedas : ArrayList<String> = arrayListOf()
-
+    lateinit var busquedas : ArrayList<String>
     var platillos : MutableList<Platillo> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buscar_platillo)
 
-        rvPlatillos = findViewById(R.id.rvplatillos_list)
+        rvPlatillos = findViewById(R.id.rv_platillos)
         busquedas = intent.getStringArrayListExtra("Platillos") as ArrayList<String>
-        buscarPlatillo()
+
+        rvPlatillos.layoutManager = LinearLayoutManager(this)
     }
 
-    fun buscarPlatillo(){
+    override fun onStart() {
+        super.onStart()
         platillos.clear()
         Firebase.firestore.collection("platillos")
             .get()
             .addOnSuccessListener {
                 for (busqueda in busquedas){
                     for (documento in it) {
-                        if(documento.id == busqueda.toString()){
+                        if(documento.id == busqueda){
                             leerImagen(documento.id, documento.data["nombre"].toString())
                         }
                     }
                 }
+                iniciarRecycler()
             }
-            .addOnFailureListener() {
-
-                Toast.makeText(this, "Error 1", Toast.LENGTH_SHORT).show();
-                Log.e("FIRESTORE", "error al leer servicios: ${it.message}")
+            .addOnFailureListener {
+                Log.e("FIRESTORE Buscar Platillo", "Error al leer servicios: ${it.message}")
             }
     }
 
@@ -58,19 +55,15 @@ class BuscarPlatilloActivity : AppCompatActivity() {
 
         storageReference.getFile(localfile)
             .addOnSuccessListener {
-
                 val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
                 platillos.add(Platillo(nombreVar, bitmap, nombreImagen))
-                iniciarRecycler()
             }
             .addOnFailureListener {
-
-                Log.e("FIREBASE", "exception: ${it.message}")
+                Log.e("FIREBASE Buscar Platillo", "Exception: ${it.message}")
             }
     }
 
     fun iniciarRecycler(){
-        rvPlatillos.layoutManager = LinearLayoutManager(this)
         val adapter = PlatilloAdapter(platillos)
         rvPlatillos.adapter = adapter
         adapter.setOnItemClickListener(object : PlatilloAdapter.onItemClickListener{

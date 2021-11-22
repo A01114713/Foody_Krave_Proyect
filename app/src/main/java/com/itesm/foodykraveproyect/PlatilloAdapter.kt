@@ -33,9 +33,9 @@ class PlatilloAdapter(val platillos : List<Platillo>) : RecyclerView.Adapter<Pla
     }
 
     class PlatilloHolder(val view : View, listener: onItemClickListener) : RecyclerView.ViewHolder(view){
-        val platilloTexto = view.findViewById<TextView>(R.id.platillo_texto_item)
-        val platilloImagen = view.findViewById<ImageView>(R.id.platillo_image_item)
-        val platilloID = view.findViewById<TextView>(R.id.platillo_id_item)
+        val platilloTexto = view.findViewById<TextView>(R.id.platillo_item_txt)
+        val platilloImagen = view.findViewById<ImageView>(R.id.platillo_item_img)
+        val platilloID = view.findViewById<TextView>(R.id.platillo_item_id)
 
         init {
             itemView.setOnClickListener {

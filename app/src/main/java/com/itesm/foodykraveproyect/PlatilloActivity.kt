@@ -1,6 +1,5 @@
 package com.itesm.foodykraveproyect
 
-import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,44 +16,45 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 
 class PlatilloActivity : AppCompatActivity() {
+
     lateinit var nombre: TextView
     lateinit var imagen : ImageView
     lateinit var autor: TextView
     lateinit var ingredientes: TextView
     lateinit var receta: TextView
-    lateinit var platilloID: String
     lateinit var boton: Button
+    lateinit var platilloID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_platillo)
 
-        nombre = findViewById(R.id.platillo_nombre_text)
-        imagen = findViewById(R.id.platillo_image)
-        autor = findViewById(R.id.autor_text)
-        ingredientes = findViewById(R.id.ingredientes_text)
-        receta = findViewById(R.id.receta_text)
-        boton = findViewById(R.id.agregar_eliminar_button)
+        nombre = findViewById(R.id.platillo_nombre)
+        imagen = findViewById(R.id.platillo_imagen)
+        autor = findViewById(R.id.platillo_autor)
+        ingredientes = findViewById(R.id.platillo_ingredientes)
+        receta = findViewById(R.id.platillo_receta)
+        boton = findViewById(R.id.agregar_eliminar_btn)
         platilloID = intent.getStringExtra("PlatilloID").toString()
     }
 
-    fun leerDatos() {
+    override fun onStart(){
+        super.onStart()
         Firebase.firestore.collection("platillos")
             .get()
             .addOnSuccessListener {
                 for (documento in it) {
                     if(documento.id == platilloID){
                         nombre.text = documento.data["nombre"].toString()
-                        ingredientes.text = "Ingredientes: \n" + documento.data["ingredientes texto"].toString()
-                        receta.text = "Receta: \n" + documento.data["receta"].toString()
+                        ingredientes.text = "Ingredientes:\n${documento.data["ingredientes texto"].toString()}"
+                        receta.text = "Receta:\n${documento.data["receta"].toString()}"
                         leerAutor(documento.data["user id"].toString())
                         leerImagen(platilloID)
                     }
                 }
             }
-            .addOnFailureListener() {
-
-                Log.e("FIRESTORE", "error al leer servicios: ${it.message}")
+            .addOnFailureListener {
+                Log.e("FIRESTORE Platillo", "Error al leer servicios: ${it.message}")
             }
     }
 
@@ -68,8 +68,8 @@ class PlatilloActivity : AppCompatActivity() {
                     }
                 }
             }
-            .addOnFailureListener() {
-                Log.e("FIRESTORE", "error al leer usuarios: ${it.message}")
+            .addOnFailureListener {
+                Log.e("FIRESTORE Platillo", "error al leer usuarios: ${it.message}")
             }
     }
 
@@ -79,48 +79,41 @@ class PlatilloActivity : AppCompatActivity() {
 
         storageReference.getFile(localfile)
             .addOnSuccessListener {
-
                 val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
                 imagen.setImageBitmap(bitmap)
-                Log.d("FIREBASE", "Correctamente cargado")
+                Log.d("FIREBASE Platillo", "Correctamente cargado")
             }
             .addOnFailureListener {
-
-                Log.e("FIREBASE", "exception: ${it.message}")
+                Log.e("FIREBASE Platillo", "exception: ${it.message}")
             }
     }
 
-    fun agregarEliminar(view : View){
-        var platillosGuardados : ArrayList<String> = arrayListOf()
-        var usuario = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    fun agregarEliminar(v : View){
+        var platillosGuardados: ArrayList<String>
+        val usuario = FirebaseAuth.getInstance().currentUser?.uid.toString()
         var documentoID : String
 
         Firebase.firestore.collection("usuarios")
             .get()
             .addOnSuccessListener {
-
                 for (documento in it) {
                     if(documento.data["user id"] == usuario){
                         platillosGuardados = documento.data["platillos"] as ArrayList<String>
-                        platillosGuardados.add(platilloID)
-                        documentoID = documento.id.toString()
-
-                        Firebase.firestore.collection("usuarios").document(documentoID).update(
-                            mapOf("platillos" to platillosGuardados)
-                        )
-
-                        Toast.makeText(this, "Platillo guardado", Toast.LENGTH_SHORT).show();
+                        if (!platillosGuardados.contains(platilloID)) {
+                            platillosGuardados.add(platilloID)
+                            documentoID = documento.id
+                                Firebase.firestore.collection("usuarios").document(documentoID).update(
+                                    mapOf("platillos" to platillosGuardados)
+                                )
+                            Toast.makeText(this, "Platillo guardado", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "El platillo ya esta guardado", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
-            .addOnFailureListener() {
-
-                Log.e("FIRESTORE", "error al leer servicios: ${it.message}")
+            .addOnFailureListener {
+                Log.e("FIRESTORE Platillo", "error al leer servicios: ${it.message}")
             }
-    }
-
-    override fun onStart(){
-        super.onStart()
-        leerDatos()
     }
 }

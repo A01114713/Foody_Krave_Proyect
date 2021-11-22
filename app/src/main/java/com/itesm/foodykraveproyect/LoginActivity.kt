@@ -19,17 +19,17 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        email = findViewById(R.id.email_login_text_edit)
-        password = findViewById(R.id.password_text_edit)
+        email = findViewById(R.id.login_email_input)
+        password = findViewById(R.id.login_password_input)
     }
 
-    fun revisarCampos(view : View) {
+    fun revisarCampos(v : View) {
         if(email.text.toString().isEmpty()){
-            Toast.makeText(this, "Falta agregar el correo electronico", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Falta agregar el correo electronico", Toast.LENGTH_SHORT).show()
             return
         }
         if(password.text.toString().isEmpty()){
-            Toast.makeText(this, "Falta agregar la contraseña", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Falta agregar la contraseña", Toast.LENGTH_SHORT).show()
             return
         }
         login()
@@ -41,12 +41,13 @@ class LoginActivity : AppCompatActivity() {
             password.text.toString()
         ).addOnCompleteListener(this){
             if(it.isSuccessful){
-                Log.d("FIREBASE", "Registro exitoso")
+                Log.d("FIREBASE", "Login exitoso")
                 val intent = Intent(this, MenuActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
-                Log.e("FIREBASE", "Registro fracasó: ${it.exception?.message}")
-                Toast.makeText(this, "Cuenta no existe o contraseña es erronea", Toast.LENGTH_SHORT).show();
+                Log.e("FIREBASE", "Login fracasó: ${it.exception?.message}")
+                Toast.makeText(this, "Cuenta no existe o contraseña es erronea", Toast.LENGTH_SHORT).show()
             }
         }
     }
