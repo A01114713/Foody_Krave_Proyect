@@ -41,7 +41,6 @@ class BuscarIngredienteActivity : AppCompatActivity() {
                 for (documento in it) {
                     leerImagen(documento.id, documento.data["nombre"].toString())
                 }
-                iniciarRecycler()
             }
             .addOnFailureListener {
                 Log.e("FIRESTORE Buscar Ingrediente", "Error al leer servicios: ${it.message}")
@@ -60,7 +59,6 @@ class BuscarIngredienteActivity : AppCompatActivity() {
                         leerImagen(documento.id, documento.data["nombre"].toString())
                     }
                 }
-                iniciarRecycler()
             }
             .addOnFailureListener {
                 Log.e("FIRESTORE Buscar Ingrediente", "error al leer servicios: ${it.message}")
@@ -81,6 +79,7 @@ class BuscarIngredienteActivity : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
                 ingredientes.add(Ingrediente(nombreVar, bitmap, nombreImagen))
                 Log.d("FIREBASE Buscar Ingrediente", "Correctamente cargado")
+                iniciarRecycler()
             }
             .addOnFailureListener {
                 Log.e("FIREBASE Buscar Ingrediente", "exception: ${it.message}")

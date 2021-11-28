@@ -42,7 +42,6 @@ class BuscarPlatilloActivity : AppCompatActivity() {
                         }
                     }
                 }
-                iniciarRecycler()
             }
             .addOnFailureListener {
                 Log.e("FIRESTORE Buscar Platillo", "Error al leer servicios: ${it.message}")
@@ -57,6 +56,7 @@ class BuscarPlatilloActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
                 platillos.add(Platillo(nombreVar, bitmap, nombreImagen))
+                iniciarRecycler()
             }
             .addOnFailureListener {
                 Log.e("FIREBASE Buscar Platillo", "Exception: ${it.message}")
