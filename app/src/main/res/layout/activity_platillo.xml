@@ -112,7 +112,6 @@
                 android:layout_marginTop="24dp"
                 android:backgroundTint="?attr/colorOnSecondary"
                 android:onClick="agregarEliminar"
-                android:text="Agregar a favoritos"
                 android:textColor="?attr/colorOnPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

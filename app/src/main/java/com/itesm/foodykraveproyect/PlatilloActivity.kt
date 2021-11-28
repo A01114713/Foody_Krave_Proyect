@@ -51,10 +51,12 @@ class PlatilloActivity : AppCompatActivity() {
                         ingredientes.text = "Ingredientes:\n${documento.data["ingredientes texto"].toString()}"
                         receta.text = "Receta:\n${documento.data["receta"].toString()}"
                         val autorid = documento.data["user id"].toString()
+                        val usuarioid = FirebaseAuth.getInstance().currentUser?.uid.toString()
                         leerAutor(autorid)
                         leerImagen(platilloID)
+                        cargarBoton(usuarioid)
 
-                        if(FirebaseAuth.getInstance().currentUser?.uid.toString() == autorid){
+                        if(usuarioid == autorid){
                             eliminarBoton.visibility = View.VISIBLE
                         }
                     }
@@ -95,6 +97,31 @@ class PlatilloActivity : AppCompatActivity() {
             }
     }
 
+    fun cargarBoton(usuarioid : String){
+        var platillosGuardados: ArrayList<String>
+
+        Firebase.firestore.collection("usuarios")
+            .get()
+            .addOnSuccessListener {
+                for (documento in it) {
+
+                    if(documento.data["user id"] == usuarioid) {
+                        platillosGuardados = documento.data["platillos"] as ArrayList<String>
+
+                        if (platillosGuardados.contains(platilloID)) {
+                            boton.setText("Eliminar de favoritos")
+                            break
+                        } else {
+                            boton.setText("Añadir a favoritos")
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener {
+                Log.e("FIRESTORE Platillo", "error al leer usuarios: ${it.message}")
+            }
+    }
+
     fun agregarEliminar(v : View){
         var platillosGuardados: ArrayList<String>
         val usuario = FirebaseAuth.getInstance().currentUser?.uid.toString()
@@ -108,14 +135,20 @@ class PlatilloActivity : AppCompatActivity() {
                         platillosGuardados = documento.data["platillos"] as ArrayList<String>
                         if (!platillosGuardados.contains(platilloID)) {
                             platillosGuardados.add(platilloID)
-                            documentoID = documento.id
-                                Firebase.firestore.collection("usuarios").document(documentoID).update(
-                                    mapOf("platillos" to platillosGuardados)
-                                )
+                            boton.setText("Eliminar de favoritos")
+
                             Toast.makeText(this, "Platillo guardado", Toast.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(this, "El platillo ya esta guardado", Toast.LENGTH_SHORT).show()
+                            platillosGuardados.remove(platilloID)
+                            boton.setText("Añadir a favoritos")
+
+                            Toast.makeText(this, "Platillo eliminado de favoritos", Toast.LENGTH_SHORT).show()
                         }
+
+                        documentoID = documento.id
+                        Firebase.firestore.collection("usuarios").document(documentoID).update(
+                            mapOf("platillos" to platillosGuardados)
+                        )
                     }
                 }
             }
