@@ -24,6 +24,7 @@ class PlatilloActivity : AppCompatActivity() {
     lateinit var receta: TextView
     lateinit var boton: Button
     lateinit var platilloID: String
+    lateinit var eliminarBoton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,7 @@ class PlatilloActivity : AppCompatActivity() {
         ingredientes = findViewById(R.id.platillo_ingredientes)
         receta = findViewById(R.id.platillo_receta)
         boton = findViewById(R.id.agregar_eliminar_btn)
+        eliminarBoton = findViewById(R.id.eliminar_btn)
         platilloID = intent.getStringExtra("PlatilloID").toString()
     }
 
@@ -48,8 +50,13 @@ class PlatilloActivity : AppCompatActivity() {
                         nombre.text = documento.data["nombre"].toString()
                         ingredientes.text = "Ingredientes:\n${documento.data["ingredientes texto"].toString()}"
                         receta.text = "Receta:\n${documento.data["receta"].toString()}"
-                        leerAutor(documento.data["user id"].toString())
+                        val autorid = documento.data["user id"].toString()
+                        leerAutor(autorid)
                         leerImagen(platilloID)
+
+                        if(FirebaseAuth.getInstance().currentUser?.uid.toString() == autorid){
+                            eliminarBoton.visibility = View.VISIBLE
+                        }
                     }
                 }
             }
@@ -114,6 +121,19 @@ class PlatilloActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Log.e("FIRESTORE Platillo", "error al leer servicios: ${it.message}")
+            }
+    }
+
+    fun borrar(v : View){
+        Firebase.firestore.collection("platillos").document(platilloID)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("FIREBASE", "Documento borrado")
+                Toast.makeText(this, "Platillo eliminado", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE", "Error al borrar documento", e)
             }
     }
 }

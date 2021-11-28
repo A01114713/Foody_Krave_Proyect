@@ -112,11 +112,26 @@
                 android:layout_marginTop="24dp"
                 android:backgroundTint="?attr/colorOnSecondary"
                 android:onClick="agregarEliminar"
-                android:text="Agregar"
+                android:text="Agregar a favoritos"
                 android:textColor="?attr/colorOnPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/platillo_receta" />
+
+            <Button
+                android:id="@+id/eliminar_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="?attr/colorOnSecondary"
+                android:onClick="borrar"
+                android:text="Eliminar"
+                android:textColor="?attr/colorOnPrimary"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/agregar_eliminar_btn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
